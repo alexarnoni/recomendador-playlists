@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>🎧 Recomendador de Playlists Inteligente</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/favicon/favicon-32x32.png" type="image/png">
+</head>
+<body>
+
+    <!-- Importar header -->
+    {% include 'shared/header.html' %}
+
+    <main>
+        <h2>Como você está se sentindo hoje?</h2>
+
+        <!-- Entrada por texto -->
+        <input type="text" id="sentimento" placeholder="Digite como você está...">
+        <button onclick="getRecommendation()">Buscar Playlist</button>
+
+        <!-- Botões de sentimento -->
+        <p>Ou selecione um sentimento:</p>
+        <div id="botoes-sentimento">
+            <button onclick="selecionarSentimento('alegria')">😃 Alegria</button>
+            <button onclick="selecionarSentimento('tristeza')">😢 Tristeza</button>
+            <button onclick="selecionarSentimento('raiva')">😡 Raiva</button>
+            <button onclick="selecionarSentimento('medo')">😨 Medo</button>
+            <button onclick="selecionarSentimento('amor')">💘 Amor</button>
+            <button onclick="selecionarSentimento('surpresa')">😲 Surpresa</button>
+        </div>
+
+        <!-- Resultado da recomendação -->
+        <div id="resultado"></div>
+
+        <div id="nova-recomendacao" style="display: none; margin-top: 20px;">
+            <button onclick="resetarInterface()">🔁 Nova Recomendação</button>
+        </div>      
+    </main>
+
+    <!-- Importar footer -->
+    {% include 'shared/footer.html' %}
+
+    <script src="/static/script.js" defer></script>
+</body>
+</html>
