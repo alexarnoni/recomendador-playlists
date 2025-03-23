@@ -28,5 +28,4 @@ Thumbs.db
 # Histórico local
 backend/historico_recomendacoes.json
 
-# Node/JS (caso use futuramente)
-node_modules/
+backend/ .cache
