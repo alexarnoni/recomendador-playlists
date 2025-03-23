@@ -28,4 +28,5 @@ Thumbs.db
 # Histórico local
 backend/historico_recomendacoes.json
 
+# Cache do Spotipy
 backend/.cache
