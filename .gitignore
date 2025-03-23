@@ -28,4 +28,4 @@ Thumbs.db
 # Histórico local
 backend/historico_recomendacoes.json
 
-backend/ .cache
+backend/.cache
