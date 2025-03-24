@@ -170,3 +170,9 @@ body {
 main, header, footer, input, button {
     transition: background-color 0.4s, color 0.4s, border 0.4s;
 }
+
+.erro {
+    color: #cc0000;
+    font-weight: bold;
+    margin-top: 1rem;
+}

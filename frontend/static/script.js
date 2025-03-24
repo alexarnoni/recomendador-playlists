@@ -1,21 +1,35 @@
 async function getRecommendation() {
     let frase = document.getElementById("sentimento").value;
-    let response = await fetch(`http://127.0.0.1:8000/api/recomendar?frase=${encodeURIComponent(frase)}`);
-    let data = await response.json();
-
     let resultado = document.getElementById("resultado");
-    resultado.innerHTML = `<p class="fade-in">${data.mensagem}</p>`;
 
-    if (data.playlist_1) {
-        resultado.innerHTML += renderizarPlaylist(data.playlist_1);
+    try {
+        let response = await fetch(`http://127.0.0.1:8000/api/recomendar?frase=${encodeURIComponent(frase)}`);
+
+        if (!response.ok) {
+            let erro = await response.json();
+            resultado.innerHTML = `<p class="erro fade-in">${erro.erro}</p>`;
+            document.getElementById("nova-recomendacao").style.display = "none";
+            return;
+        }
+
+        let data = await response.json();
+
+        resultado.innerHTML = `<p class="fade-in">${data.mensagem}</p>`;
+
+        if (data.playlist_1) {
+            resultado.innerHTML += renderizarPlaylist(data.playlist_1);
+        }
+
+        if (data.playlist_2) {
+            resultado.innerHTML += renderizarPlaylist(data.playlist_2);
+        }
+
+        document.getElementById("nova-recomendacao").style.display = "block";
+
+    } catch (err) {
+        resultado.innerHTML = `<p class="erro fade-in">Erro ao conectar com a API.</p>`;
+        console.error(err);
     }
-
-    if (data.playlist_2) {
-        resultado.innerHTML += renderizarPlaylist(data.playlist_2);
-    }
-
-    // Exibe o botão "Nova Recomendação"
-    document.getElementById("nova-recomendacao").style.display = "block";
 }
 
 function renderizarPlaylist(playlist) {

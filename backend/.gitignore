@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+*.sqlite3
+*.db
+
+# Virtual Envs
+venv/
+.env
+
+# Logs
+*.log
+
+# VSCode
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Cache de notebooks ou scripts
+.ipynb_checkpoints/
+
+# Histórico local
+backend/historico_recomendacoes.json
+
+# Cache do Spotipy
+backend/.cache

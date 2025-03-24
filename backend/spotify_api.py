@@ -4,33 +4,36 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import random
 from collections import defaultdict, deque
+from config import settings
 
 # Carregar variáveis do .env
 load_dotenv()
 
 # Configurar autenticação no Spotify
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
-    client_id=os.getenv("SPOTIFY_CLIENT_ID"),
-    client_secret=os.getenv("SPOTIFY_CLIENT_SECRET")
+    client_id=settings.SPOTIFY_CLIENT_ID,
+    client_secret=settings.SPOTIFY_CLIENT_SECRET
 ))
 
-def traduzir_sentimento(sentimento):
-    mapa = {
-        "alegria": ["feel good", "good vibes", "party time", "sunny mood"],
-        "tristeza": ["sad songs", "melancholy", "heartbreak", "rainy day"],
-        "raiva": ["rage", "angry rock", "workout angry", "hardcore"],
-        "amor": ["love songs", "romantic", "slow love", "amor acústico"],
-        "medo": ["dark ambient", "cinematic tension", "eerie mood", "nightfall"],
-        "surpresa": ["unexpected gems", "shuffle playlist", "weird & wonderful"]
-    }
+# Traduções para termos de busca no Spotify
+MAPA_BUSCA = {
+    "alegria": ["feel good", "good vibes", "party time", "sunny mood"],
+    "tristeza": ["sad songs", "melancholy", "heartbreak", "rainy day"],
+    "raiva": ["rage", "angry rock", "workout angry", "hardcore"],
+    "amor": ["love songs", "romantic", "slow love", "amor acústico"],
+    "medo": ["dark ambient", "cinematic tension", "eerie mood", "nightfall"],
+    "surpresa": ["unexpected gems", "shuffle playlist", "weird & wonderful"]
+}
 
-    return random.choice(mapa.get(sentimento.lower(), [sentimento]))
+def traduzir_para_ingles(sentimento):
+    """Retorna um termo em inglês para busca no Spotify"""
+    return random.choice(MAPA_BUSCA.get(sentimento.lower(), [sentimento]))
 
 # Cache temporário por sentimento
 CACHE_PLAYLISTS = defaultdict(lambda: deque(maxlen=3))  # guarda as 3 últimas por sentimento
 
 def buscar_playlist(sentimento):
-    termo_busca = traduzir_sentimento(sentimento)
+    termo_busca = traduzir_para_ingles(sentimento)
 
     try:
         resultado = sp.search(q=termo_busca, type="playlist", limit=10)
@@ -76,4 +79,3 @@ def buscar_playlist(sentimento):
             "nome": "Playlist padrão",
             "imagem": None
         }
-
