@@ -1,6 +1,8 @@
 async function getRecommendation() {
-    let frase = document.getElementById("sentimento").value;
+    let frase = document.getElementById("sentimento")?.value;
     let resultado = document.getElementById("resultado");
+
+    if (!frase || !resultado) return;
 
     try {
         let response = await fetch(`http://127.0.0.1:8000/api/recomendar?frase=${encodeURIComponent(frase)}`);
@@ -42,14 +44,15 @@ function renderizarPlaylist(playlist) {
             <button style="margin-top: 10px; padding: 10px;">🎧 Ouvir Playlist</button>
         </a>
     </div>
-`;
+    `;
 }
 
 function selecionarSentimento(sentimento) {
-    // Preenche o campo de texto com uma frase automática
     const input = document.getElementById("sentimento");
+    if (!input) return;
+
     input.value = `Estou sentindo ${sentimento}`;
-    getRecommendation(); // Chama a recomendação direto
+    getRecommendation();
 }
 
 function alternarModo() {
@@ -60,16 +63,16 @@ function alternarModo() {
     body.classList.toggle("light-mode");
 
     const modoAtual = body.classList.contains("dark-mode") ? "dark" : "light";
-    toggle.textContent = modoAtual === "dark" ? "☀️" : "🌙";
+    if (toggle) {
+        toggle.textContent = modoAtual === "dark" ? "☀️" : "🌙";
+    }
 
-    // Salva no localStorage
     localStorage.setItem("modo-visual", modoAtual);
 }
 
-// Carrega o modo salvo
 window.onload = function () {
     const modoSalvo = localStorage.getItem("modo-visual") || "light";
-    document.body.classList.add(modoSalvo + "-mode");
+    document.body.classList.add(`${modoSalvo}-mode`);
 
     const toggle = document.getElementById("modo-toggle");
     if (toggle) {
@@ -78,8 +81,11 @@ window.onload = function () {
 }
 
 function resetarInterface() {
-    document.getElementById("sentimento").value = "";
-    document.getElementById("resultado").innerHTML = "";
-    document.getElementById("nova-recomendacao").style.display = "none";
-}
+    const input = document.getElementById("sentimento");
+    const resultado = document.getElementById("resultado");
+    const novaRecomendacao = document.getElementById("nova-recomendacao");
 
+    if (input) input.value = "";
+    if (resultado) resultado.innerHTML = "";
+    if (novaRecomendacao) novaRecomendacao.style.display = "none";
+}

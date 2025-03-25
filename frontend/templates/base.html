@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}PlayMood{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', path='favicon/favicon-32x32.png') }}" type="image/png">
+</head>
+<body>
+
+    {% include 'shared/header.html' %}
+
+    <main>
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    {% include 'shared/footer.html' %}
+
+    <script src="{{ url_for('static', path='script.js') }}" defer></script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

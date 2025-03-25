@@ -1,178 +1,237 @@
+:root {
+  --fundo: #f5f5f5;
+  --texto: #222;
+  --bg-secundario: #eaeaea;
+  --cor-borda: #ccc;
+}
+
+body.dark-mode {
+  --fundo: #1e1e1e;
+  --texto: #f0f0f0;
+  --bg-secundario: #2a2a2a;
+  --cor-borda: #444;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    color: #222;
-}
-
-header {
-    background-color: #111;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 24px;
-}
-
-footer {
-    background-color: #111;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    margin-top: 40px;
-}
-
-main {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-input[type="text"] {
-    padding: 10px;
-    width: 100%;
-    max-width: 500px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-button {
-    padding: 10px 16px;
-    margin: 5px;
-    background-color: #222;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #444;
-}
-
-#resultado img {
-    margin-top: 10px;
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-    main {
-        margin: 20px;
-        padding: 15px;
-    }
-
-    button {
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    input[type="text"] {
-        width: 100%;
-    }
+  font-family: Arial, sans-serif;
+  background-color: var(--fundo);
+  margin: 0;
+  padding: 0;
+  color: var(--texto);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.4s, color 0.4s;
 }
 
 html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
+  height: 100%;
 }
 
 main {
-    flex: 1;
+  flex: 1;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s, color 0.4s, border 0.4s;
 }
 
-/* Botão do modo escuro */
+/* HEADER */
+.top-header {
+  background-color: #1f1f1f;
+  padding: 16px 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-header h1 {
+  font-size: 28px;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-header {
+  padding: 8px 14px;
+  background-color: #333;
+  color: #eee;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.btn-header:hover {
+  background-color: #444;
+  border: 1px solid #666;
+}
+
+/* Botão modo escuro */
 #modo-toggle {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #eee;
+  cursor: pointer;
 }
 
-/* Modo claro (padrão) */
-body.light-mode {
-    background-color: #f5f5f5;
-    color: #222;
+/* Footer */
+footer {
+  background-color: #1f1f1f;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-top: 40px;
 }
 
-body.light-mode header,
-body.light-mode footer {
-    background-color: #111;
-    color: white;
+/* Inputs */
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: background-color 0.4s, color 0.4s, border 0.4s;
 }
 
-body.light-mode main {
-    background-color: white;
+/* Botões gerais */
+button {
+  padding: 10px 16px;
+  margin: 5px 0;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+#resultado img {
+  margin-top: 10px;
+  max-width: 100%;
+  border-radius: 10px;
 }
 
 /* Modo escuro */
-body.dark-mode {
-    background-color: #121212;
-    color: #eee;
-}
-
-body.dark-mode header,
-body.dark-mode footer {
-    background-color: #000;
-    color: #fff;
-}
-
 body.dark-mode main {
-    background-color: #1e1e1e;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-secundario);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 body.dark-mode input,
 body.dark-mode button {
-    background-color: #2c2c2c;
-    color: #fff;
-    border: 1px solid #444;
+  background-color: #2c2c2c;
+  color: #fff;
+  border: 1px solid var(--cor-borda);
 }
 
 body.dark-mode button:hover {
-    background-color: #444;
+  background-color: #444;
 }
 
-/* Animações suaves */
+/* Animação */
 .fade-in {
-    animation: fadeIn 0.6s ease-in-out;
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Transição suave de temas */
-body {
-    transition: background-color 0.4s, color 0.4s;
+/* PAINEL ADMIN - estilo responsivo */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-main, header, footer, input, button {
-    transition: background-color 0.4s, color 0.4s, border 0.4s;
+.admin-grid-top {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.erro {
-    color: #cc0000;
-    font-weight: bold;
-    margin-top: 1rem;
+.admin-grid-meio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.admin-section {
+  background-color: var(--bg-secundario, #f0f0f0);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+  flex: 1;
+  min-width: 300px;
+}
+
+.admin-section h3 {
+  margin-bottom: 15px;
+}
+
+.admin-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-section li {
+  margin-bottom: 15px;
+  line-height: 1.4em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#grafico-sentimentos {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#filtro {
+  padding: 6px;
+  border-radius: 6px;
+  max-width: 200px;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .admin-grid-meio {
+    flex-direction: column;
+  }
 }

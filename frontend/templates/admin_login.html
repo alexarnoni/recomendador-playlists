@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Admin</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  {% include "shared/header.html" %}
+  <main>
+    <h1 class="titulo">Acesso Administrativo</h1>
+    <form method="post" action="/admin">
+      <label for="token">Senha de Acesso:</label>
+      <input type="password" id="token" name="token" required />
+      <button type="submit">Entrar</button>
+    </form>
+    {% if erro %}
+      <p style="color: red;">{{ erro }}</p>
+    {% endif %}
+  </main>
+  {% include "shared/footer.html" %}
+</body>
+</html>
