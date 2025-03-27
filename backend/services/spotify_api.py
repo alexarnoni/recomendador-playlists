@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import random
 from collections import defaultdict, deque
 from config import settings
-from tradutor import traduzir_para_ingles
+from utils.tradutor import traduzir_para_ingles
 
 # Carregar variáveis do .env
 load_dotenv()

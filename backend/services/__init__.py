@@ -1,0 +1,1 @@
+# Inicialização dos serviços (sentimentos, Spotify, histórico)

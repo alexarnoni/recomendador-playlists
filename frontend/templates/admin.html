@@ -4,16 +4,18 @@
 
 {% block conteudo %}
 <div class="admin-container">
-
+  <div class="admin-section" style="text-align: right; margin-top: -20px; background: transparent; box-shadow: none;">
+    <a href="/admin/logout" class="btn-header" style="background-color: #c62828;">Sair</a>
+  </div>
+  
   <h2>Painel de Recomendações</h2>
 
   <!-- TOPO: Gráfico + Filtro -->
   <div class="admin-grid-top">
-    <div class="admin-section">
+    <div class="admin-section fade-in">
       <canvas id="grafico-sentimentos" width="400" height="200"></canvas>
     </div>
-
-    <div class="admin-section">
+    <div class="admin-section fade-in">
       <label for="filtro">Filtrar por sentimento:</label>
       <select id="filtro" onchange="filtrarSentimento()">
         <option value="todos">Todos</option>
@@ -26,10 +28,10 @@
 
   <!-- MEIO: Últimas Frases + Playlists lado a lado -->
   <div class="admin-grid-meio">
-    <div class="admin-section" id="lista-frases">
+    <div class="admin-section fade-in" id="lista-frases">
       <h3>Últimas Frases:</h3>
       <ul>
-        {% for item in recomendacoes[-5:] %}
+        {% for item in ultimas_frases %}
           <li data-sentimento="{{ item.sentimento }}">
             <strong>Frase:</strong> {{ item.frase }} <br>
             <strong>Sentimento:</strong> {{ item.sentimento }}
@@ -38,7 +40,7 @@
       </ul>
     </div>
 
-    <div class="admin-section">
+    <div class="admin-section fade-in">
       <h3>Playlists Mais Recomendadas:</h3>
       <ul>
         {% for playlist in mais_recomendadas %}
@@ -51,7 +53,7 @@
   </div>
 
   <!-- BASE: Limpar Histórico -->
-  <div class="admin-section">
+  <div class="admin-section fade-in">
     <h3>Limpar Histórico</h3>
     <form action="/admin/limpar" method="post">
       <label for="senha">Confirme sua senha:</label>
@@ -89,6 +91,32 @@
       const sentimento = frase.dataset.sentimento;
       frase.style.display = (filtro === 'todos' || filtro === sentimento) ? '' : 'none';
     });
+  }
+
+  // Mostrar mais frases aos poucos
+  let frasesVisiveis = 5;
+  window.onload = () => {
+    const todas = document.querySelectorAll("#lista-frases li");
+    todas.forEach((li, idx) => {
+      li.style.display = idx < frasesVisiveis ? '' : 'none';
+    });
+
+    if (todas.length > frasesVisiveis) {
+      const btn = document.createElement("button");
+      btn.innerText = "Ver mais frases";
+      btn.id = "btn-carregar-mais";
+      btn.classList.add("fade-in");
+      btn.onclick = () => {
+        frasesVisiveis += 5;
+        todas.forEach((li, idx) => {
+          li.style.display = idx < frasesVisiveis ? '' : 'none';
+        });
+        if (frasesVisiveis >= todas.length) {
+          btn.remove();
+        }
+      };
+      document.getElementById("lista-frases").appendChild(btn);
+    }
   }
 </script>
 {% endblock %}

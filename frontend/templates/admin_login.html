@@ -9,11 +9,16 @@
   {% include "shared/header.html" %}
   <main>
     <h1 class="titulo">Acesso Administrativo</h1>
-    <form method="post" action="/admin">
-      <label for="token">Senha de Acesso:</label>
-      <input type="password" id="token" name="token" required />
+    <form method="post" action="/admin/login">
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required />
+
       <button type="submit">Entrar</button>
     </form>
+
     {% if erro %}
       <p style="color: red;">{{ erro }}</p>
     {% endif %}

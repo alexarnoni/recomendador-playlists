@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block titulo %}Cadastro de Admin - PlayMood{% endblock %}
+
+{% block conteudo %}
+<div class="admin-container fade-in">
+  <h2>Criar Novo Administrador</h2>
+
+  <form method="post" action="/admin/registrar">
+    <label for="usuario">Nome de usuário:</label>
+    <input type="text" id="usuario" name="username" required>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
+
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  {% if erro %}
+    <p style="color: red;">{{ erro }}</p>
+  {% endif %}
+
+  {% if sucesso %}
+    <p style="color: green;">{{ sucesso }}</p>
+  {% endif %}
+</div>
+{% endblock %}
